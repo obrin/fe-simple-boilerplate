@@ -1,8 +1,10 @@
 const expect = require('chai').expect
 const jsdom = require("jsdom").jsdom;
-const doc = jsdom(undefined, {});
-global.window = doc.defaultView;
+const fs = require('fs')
+const html = fs.readFileSync('./index.html', 'utf8')
 
+global.document = jsdom(html, {});
+global.window = document.defaultView;
 require('./../index.js')
 
 describe('#hello', () => {
